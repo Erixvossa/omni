@@ -1,0 +1,21 @@
+@import "./_show/form__span-error_show";
+@import "./_confirmed/form__span-error_confirmed";
+
+.form__span-error {
+
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 50;
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  display: flex;
+
+}

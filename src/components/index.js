@@ -6,8 +6,8 @@ const formPopupRules = {
     submitButtonSelector: '.form__submit-button',
     inactiveButtonClass: 'form__submit-button_disabled',
     inputErrorClass: 'form__input-error',
-    errorClass: 'form__span-error-show',
-    okClass: 'form__span-error-confirmed'
+    errorClass: 'form__span-error_show',
+    okClass: 'form__span-error_confirmed',
 };
 
 
