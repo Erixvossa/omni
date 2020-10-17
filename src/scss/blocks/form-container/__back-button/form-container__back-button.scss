@@ -1,0 +1,17 @@
+.form-container__back-button {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: white;
+  opacity: .8;
+  text-transform: uppercase;
+  font-size: 10px;
+  position: relative;
+  padding: 0;
+  padding-left: 25px;
+  cursor: pointer;
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-image: url("./images/back-arrow.png");
+  background-position: 0% 50%;
+}

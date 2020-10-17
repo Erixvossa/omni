@@ -40,6 +40,16 @@ function js() {
         .pipe(dest('dist'))
 }
 
+function img() {
+    return src('src/images/**.png')
+        .pipe(dest('dist/images'))
+}
+
+function css() {
+    return src('src/vendor/**.css')
+        .pipe(dest('dist/css'))
+}
+
 function clear() {
     return del('dist')
 }
@@ -51,9 +61,12 @@ function serve() {
 
     watch('src/**.html', series(html)).on('change', sync.reload)
     watch('src/scss/**.scss', series(scss)).on('change', sync.reload)
+    watch('src/components/**.js', series(js)).on('change', sync.reload)
+    watch('src/images/**.png', series(img)).on('change', sync.reload)
+    watch('src/vendor/**.css', series(css)).on('change', sync.reload)
 }
 
 
-exports.build = series(clear, scss, html, js)
-exports.serve = series(clear, scss, html, serve)
+exports.build = series(clear, scss, css, html, img, js)
+exports.serve = series(clear, scss, css, html, img, js, serve)
 exports.clear = clear

@@ -1,0 +1,14 @@
+$squareLogoSize: 97px;
+
+.form-container__logo {
+  height: $squareLogoSize;
+  width: $squareLogoSize;
+  border-radius: 50%;
+  overflow: hidden;
+  align-self: center;
+  margin-bottom: 20px;
+  background-image: url("./images/logo.png");
+  background-position: center;
+  background-size: 250%;
+  cursor: pointer;
+}
