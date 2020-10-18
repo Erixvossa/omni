@@ -1,6 +1,6 @@
 const formContainer = document.querySelector('.form-container');
 
-const formPopupRules = {
+const validationRules = {
     formSelector: '.form',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__submit-button',
@@ -10,6 +10,76 @@ const formPopupRules = {
     okClass: 'form__span-error_confirmed',
 };
 
+const numberInput = document.querySelector('#form-phone');
+numberInput.removeAttribute('maxlength');
+numberInput.addEventListener("input", (e) => autocompleteNumber(e));
+numberInput.setAttribute('maxlength', '19');
+numberInput.setAttribute('minlength', '19');
+
+
+const autocompleteNumber = (e) => {
+    e.preventDefault();
+
+    const numRegExp = /[a-zа-яё0-9]/gi;
+    const numberArr = [];
+
+    let numberValue = numberInput.value;
+
+    for(let i = 0; i < numberValue.length; i++) {
+        numberArr.push(numberValue[i]);
+    }
+
+    if (numberValue) {
+        const autocompletedNumberArr = numberArr.filter(num => num.match(numRegExp));
+        let numberCount = numberValue.match(numRegExp).length;
+
+        switch(numberCount) {
+            case 2:
+            case 3:
+            case 4:
+                autocompletedNumberArr.splice(1, 0, ' ( ');
+                break;
+            case 5:
+            case 6:
+            case 7:
+                autocompletedNumberArr.splice(1, 0, ' ( ');
+                autocompletedNumberArr.splice(5, 0, ' ) ');
+                break;
+            case 8:
+            case 9:
+                autocompletedNumberArr.splice(1, 0, ' ( ');
+                autocompletedNumberArr.splice(5, 0, ' ) ');
+                autocompletedNumberArr.splice(9, 0, '-');
+                break;
+            case 10:
+            case 11:
+                autocompletedNumberArr.splice(1, 0, ' ( ');
+                autocompletedNumberArr.splice(5, 0, ' ) ');
+                autocompletedNumberArr.splice(9, 0, '-');
+                autocompletedNumberArr.splice(12, 0, '-');
+                break;
+            default:
+                autocompletedNumberArr.splice(12, autocompletedNumberArr.length - 1);
+
+        }
+        numberInput.value = autocompletedNumberArr.join('');
+    }
+}
+
+
+let actualPassword = [];
+const passwordInput = document.querySelector("#form-password");
+
+const replacePassword = (event) => {
+    let passwordValue = passwordInput.value;
+    if(passwordValue && event.inputType !== "deleteContentBackward") {
+        actualPassword.push(passwordValue[passwordValue.length - 1]);
+        passwordInput.value = actualPassword.map(i => i = "*").join('');
+    } else if (event.inputType === "deleteContentBackward") {
+        actualPassword.pop();
+    }
+}
+passwordInput.addEventListener("input", (event) => replacePassword(event));
 
 
 class FormValidator {
@@ -24,6 +94,9 @@ class FormValidator {
         this._okClass = object.okClass;
     }
 
+    _enableJsValidation() {
+        this._formElement.querySelector(this._formSelector).setAttribute('novalidate', true);
+    }
 
     _showInputError(formInput) {
         const errorElement = this._formElement.querySelector(`#${formInput.id}-error`);
@@ -103,9 +176,10 @@ class FormValidator {
 
 
     enableValidation() {
+        this._enableJsValidation();
         this._setEventListeners();
     }
 }
 
-const formValidator = new FormValidator(formPopupRules, formContainer);
+const formValidator = new FormValidator(validationRules, formContainer);
 formValidator.enableValidation();

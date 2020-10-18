@@ -5,13 +5,21 @@
   display: flex;
   flex-direction: column;
   padding: 30px;
-  width: 60%;
+  width: 566px;
+  height: 374px;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
+  border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 0 25px 1px black;
   backdrop-filter: blur(8px) brightness(170%);
+}
+
+
+@media screen and (max-width: 768px) {
+  .form-container {
+    width: calc(100vw - 30%);
+  }
 }
 
 

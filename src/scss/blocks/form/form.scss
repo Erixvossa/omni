@@ -2,6 +2,9 @@
 @import "./__input/form__input";
 @import "./__input-error/form__input-error";
 @import "./__span-error/form__span-error";
+@import "./__submit-button/form__submit-button";
+@import "./__options-container/form__options-container";
+@import "./__link/form__link";
 
 .form {
   display: flex;
@@ -9,51 +12,3 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-.form__submit-button {
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  opacity: 1;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  padding: 15px;
-  border-radius: 24px;
-  min-width: 150px;
-  cursor: pointer;
-}
-
-.form__submit-button:hover {
-  color: black;
-  background: white;
-}
-
-.form__submit-button_disabled {
-  opacity: 0.4;
-}
-
-.form__submit-button_validated:hover {
-  color: black;
-  background: white;
-}
-
-.form__options-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 24px 0 18px;
-  text-align: center;
-  align-items: center;
-  margin: 12px 0 23px;
-}

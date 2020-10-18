@@ -7,7 +7,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var formContainer = document.querySelector('.form-container');
-var formPopupRules = {
+var validationRules = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit-button',
@@ -16,6 +16,86 @@ var formPopupRules = {
   errorClass: 'form__span-error_show',
   okClass: 'form__span-error_confirmed'
 };
+var numberInput = document.querySelector('#form-phone');
+numberInput.removeAttribute('maxlength');
+numberInput.addEventListener("input", function (e) {
+  return autocompleteNumber(e);
+});
+numberInput.setAttribute('maxlength', '19');
+numberInput.setAttribute('minlength', '19');
+
+var autocompleteNumber = function autocompleteNumber(e) {
+  e.preventDefault();
+  var numRegExp = /[a-zа-яё0-9]/gi;
+  var numberArr = [];
+  var numberValue = numberInput.value;
+
+  for (var i = 0; i < numberValue.length; i++) {
+    numberArr.push(numberValue[i]);
+  }
+
+  if (numberValue) {
+    var autocompletedNumberArr = numberArr.filter(function (num) {
+      return num.match(numRegExp);
+    });
+    var numberCount = numberValue.match(numRegExp).length;
+
+    switch (numberCount) {
+      case 2:
+      case 3:
+      case 4:
+        autocompletedNumberArr.splice(1, 0, ' ( ');
+        break;
+
+      case 5:
+      case 6:
+      case 7:
+        autocompletedNumberArr.splice(1, 0, ' ( ');
+        autocompletedNumberArr.splice(5, 0, ' ) ');
+        break;
+
+      case 8:
+      case 9:
+        autocompletedNumberArr.splice(1, 0, ' ( ');
+        autocompletedNumberArr.splice(5, 0, ' ) ');
+        autocompletedNumberArr.splice(9, 0, '-');
+        break;
+
+      case 10:
+      case 11:
+        autocompletedNumberArr.splice(1, 0, ' ( ');
+        autocompletedNumberArr.splice(5, 0, ' ) ');
+        autocompletedNumberArr.splice(9, 0, '-');
+        autocompletedNumberArr.splice(12, 0, '-');
+        break;
+
+      default:
+        autocompletedNumberArr.splice(12, autocompletedNumberArr.length - 1);
+    }
+
+    numberInput.value = autocompletedNumberArr.join('');
+  }
+};
+
+var actualPassword = [];
+var passwordInput = document.querySelector("#form-password");
+
+var replacePassword = function replacePassword(event) {
+  var passwordValue = passwordInput.value;
+
+  if (passwordValue && event.inputType !== "deleteContentBackward") {
+    actualPassword.push(passwordValue[passwordValue.length - 1]);
+    passwordInput.value = actualPassword.map(function (i) {
+      return i = "*";
+    }).join('');
+  } else if (event.inputType === "deleteContentBackward") {
+    actualPassword.pop();
+  }
+};
+
+passwordInput.addEventListener("input", function (event) {
+  return replacePassword(event);
+});
 
 var FormValidator = /*#__PURE__*/function () {
   function FormValidator(object, formElement) {
@@ -32,6 +112,11 @@ var FormValidator = /*#__PURE__*/function () {
   }
 
   _createClass(FormValidator, [{
+    key: "_enableJsValidation",
+    value: function _enableJsValidation() {
+      this._formElement.querySelector(this._formSelector).setAttribute('novalidate', true);
+    }
+  }, {
     key: "_showInputError",
     value: function _showInputError(formInput) {
       var errorElement = this._formElement.querySelector("#".concat(formInput.id, "-error"));
@@ -132,6 +217,8 @@ var FormValidator = /*#__PURE__*/function () {
   }, {
     key: "enableValidation",
     value: function enableValidation() {
+      this._enableJsValidation();
+
       this._setEventListeners();
     }
   }]);
@@ -139,5 +226,5 @@ var FormValidator = /*#__PURE__*/function () {
   return FormValidator;
 }();
 
-var formValidator = new FormValidator(formPopupRules, formContainer);
+var formValidator = new FormValidator(validationRules, formContainer);
 formValidator.enableValidation();

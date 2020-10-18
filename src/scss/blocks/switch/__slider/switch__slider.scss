@@ -1,0 +1,27 @@
+.switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 2px;
+  right: 0;
+  bottom: 0;
+  background: 0 0;
+  border: 1px solid #fff;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 12px;
+}
+
+.switch__slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 8px;
+  background: rgba(255,255,255,.3);
+}

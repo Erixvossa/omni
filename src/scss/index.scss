@@ -1,76 +1,10 @@
 @import 'blocks/page/page';
 @import 'blocks/form-container/form-container';
 @import 'blocks/form/form';
+@import "blocks/switch/switch";
 
 
 
-.switch {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 27px;
-  color: #fff;
-  position: relative;
-  display: inline-block;
-  width: 45px;
-  height: 24px;
-}
-
-.switch__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 2px;
-  right: 0;
-  bottom: 0;
-  background: 0 0;
-  border: 1px solid #fff;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 12px;
-}
-
-.switch__slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 22px;
-  left: 4px;
-  bottom: 4px;
-  background-color: #fff;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 8px;
-  background: rgba(255,255,255,.3);
-}
 
 
-.switch__checkbox {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
 
-.switch__checkbox:checked+.switch__slider:before {
-  background: #fff;
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
-  transform: translateX(13px);
-}
-
-.switch__label {
-  margin-left: 55px;
-}
-
-.form__link {
-  display: flex;
-  position: relative;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  text-align: center;
-  font-weight: 400;
-  color: #fff;
-  font-size: 16px;
-  line-height: 23px;
-  text-decoration: underline;
-}

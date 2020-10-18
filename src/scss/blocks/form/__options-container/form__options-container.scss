@@ -1,0 +1,15 @@
+.form__options-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 24px 0 18px;
+  text-align: center;
+  align-items: center;
+  margin: 12px 0 23px;
+}
+
+@media screen and (max-width: 768px) {
+  .form__options-container {
+    flex-direction: column;
+  }
+}
