@@ -45,6 +45,11 @@ function img() {
         .pipe(dest('dist/images'))
 }
 
+function fonts() {
+    return src('src/vendor/**.+(woff|foff2)')
+        .pipe(dest('dist/css'))
+}
+
 function css() {
     return src('src/vendor/**.css')
         .pipe(dest('dist/css'))
@@ -64,9 +69,10 @@ function serve() {
     watch('src/components/**.js', series(js)).on('change', sync.reload)
     watch('src/images/**.png', series(img)).on('change', sync.reload)
     watch('src/vendor/**.css', series(css)).on('change', sync.reload)
+    watch('src/vendor/**.+(woff|foff2)', series(fonts)).on('change', sync.reload)
 }
 
 
-exports.build = series(clear, scss, css, html, img, js)
-exports.serve = series(clear, scss, css, html, img, js, serve)
+exports.build = series(clear, scss, css, html, img, js, fonts)
+exports.serve = series(clear, scss, css, html, img, js, fonts, serve)
 exports.clear = clear
