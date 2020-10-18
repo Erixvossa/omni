@@ -1,6 +1,6 @@
 # Тестовое задание для OmniSale
 
-gitpages src: https://erixvossa.github.io/mesto/
+gitpages src: https://erixvossa.github.io/omni/
 
 ### Обзор
 
