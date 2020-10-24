@@ -77,26 +77,6 @@ var autocompleteNumber = function autocompleteNumber(e) {
   }
 };
 
-var actualPassword = [];
-var passwordInput = document.querySelector("#form-password");
-
-var replacePassword = function replacePassword(event) {
-  var passwordValue = passwordInput.value;
-
-  if (passwordValue && event.inputType !== "deleteContentBackward") {
-    actualPassword.push(passwordValue[passwordValue.length - 1]);
-    passwordInput.value = actualPassword.map(function (i) {
-      return i = "*";
-    }).join('');
-  } else if (event.inputType === "deleteContentBackward") {
-    actualPassword.pop();
-  }
-};
-
-passwordInput.addEventListener("input", function (event) {
-  return replacePassword(event);
-});
-
 var FormValidator = /*#__PURE__*/function () {
   function FormValidator(object, formElement) {
     _classCallCheck(this, FormValidator);

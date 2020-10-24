@@ -67,20 +67,6 @@ const autocompleteNumber = (e) => {
 }
 
 
-let actualPassword = [];
-const passwordInput = document.querySelector("#form-password");
-
-const replacePassword = (event) => {
-    let passwordValue = passwordInput.value;
-    if(passwordValue && event.inputType !== "deleteContentBackward") {
-        actualPassword.push(passwordValue[passwordValue.length - 1]);
-        passwordInput.value = actualPassword.map(i => i = "*").join('');
-    } else if (event.inputType === "deleteContentBackward") {
-        actualPassword.pop();
-    }
-}
-passwordInput.addEventListener("input", (event) => replacePassword(event));
-
 
 class FormValidator {
     constructor(object, formElement) {
