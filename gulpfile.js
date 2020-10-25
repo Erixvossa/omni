@@ -46,7 +46,7 @@ function img() {
 }
 
 function fonts() {
-    return src('src/vendor/**.+(woff|foff2)')
+    return src('src/vendor/*.+(woff|woff2)')
         .pipe(dest('dist/css'))
 }
 
@@ -69,7 +69,7 @@ function serve() {
     watch('src/components/**.js', series(js)).on('change', sync.reload)
     watch('src/images/**.png', series(img)).on('change', sync.reload)
     watch('src/vendor/**.css', series(css)).on('change', sync.reload)
-    watch('src/vendor/**.+(woff|foff2)', series(fonts)).on('change', sync.reload)
+    watch('src/vendor/*.+(woff|woff2)', series(fonts)).on('change', sync.reload)
 }
 
 

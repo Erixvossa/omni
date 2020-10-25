@@ -67,7 +67,6 @@ const autocompleteNumber = (e) => {
 }
 
 
-
 class FormValidator {
     constructor(object, formElement) {
         this._formSelector = object.formSelector;
